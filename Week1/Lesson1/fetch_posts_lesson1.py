@@ -7,14 +7,14 @@ def fetch_posts(limit=50):
     cs_stories = [] # Empty list to store the CS Stories.
 
     for pid in ids[:limit]: # Loop through the top stories and store the CS stories in the cs_stories list.
-        item = requests.get(f"https://hacker-news.firebaseio.com/v0/item/{pid}.json").json()
-        if item and "title" in item:
-            title = item["title"].lower()
+        item = requests.get(f"https://hacker-news.firebaseio.com/v0/item/{pid}.json").json() # This line fetches each individual story by its ID and stores it in the item variable.
+        if item and "title" in item: # This checks if the item exists and has a title.
+            title = item["title"].lower() # This converts the title to lowercase for easier keyword matching.
 
             if "research" in title or "ai" in title or "computer" in title or "machine" in title or "learning" in title or "deep" in title: # This filters the posts by having keywords.
-                cs_stories.append(item)
+                cs_stories.append(item) # This appends the story to the cs_stories list.
 
-    return cs_stories
+    return cs_stories # Returns the list of CS stories.
 
 # This block runs only if the file is executed directly (not imported as a module)
 if __name__ == "__main__":
