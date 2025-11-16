@@ -33,9 +33,14 @@ def load_from_json(filename="stories.json"): # Loads data from a JSON file.
 
 # This block runs only if the file is executed directly (not imported as a module)
 if __name__ == "__main__":
-
+    USE_CACHE = False  # Set to True to load from cache, False to fetch fresh data
+    if USE_CACHE:
+        stories = load_from_json()
+        print(f"Loaded {len(stories)} items from cache")
+    else:
+        stories = fetch_posts(100)
+        save_to_json(stories)
     # Fetch the top 100 stories and filter them for CS-related content
-    stories = fetch_posts(100)
 
     # Print the title of each CS-related story
     for s in stories:
